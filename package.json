@@ -16,5 +16,19 @@
   "bugs": {
     "url": "https://github.com/msa0683/react-nyt-search-app/issues"
   },
-  "homepage": "https://github.com/msa0683/react-nyt-search-app#readme"
+  "homepage": "https://github.com/msa0683/react-nyt-search-app#readme",
+  "dependencies": {
+    "Express": "^3.0.1",
+    "axios": "^0.16.2",
+    "babel": "^6.23.0",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.17.2",
+    "mongoose": "^4.11.6",
+    "morgan": "^1.8.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "webpack": "^3.5.4"
+  }
 }
