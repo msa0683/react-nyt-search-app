@@ -1,0 +1,20 @@
+{
+  "name": "react-nyt-search-app",
+  "version": "1.0.0",
+  "description": "React NYT article search app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msa0683/react-nyt-search-app.git"
+  },
+  "author": "Mariam Arghandewal Safi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/msa0683/react-nyt-search-app/issues"
+  },
+  "homepage": "https://github.com/msa0683/react-nyt-search-app#readme"
+}
