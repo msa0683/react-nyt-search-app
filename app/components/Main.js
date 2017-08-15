@@ -4,7 +4,7 @@
 var React = require("react");
 
 // Here we include all of the sub-components
-var Results = require("./children/Saved");
+var Results = require("./children/Results");
 var History = require("./children/Search");
 
 // Helper for making AJAX requests to our API

@@ -70,7 +70,6 @@ app.post("/api/saved", function(req, res) {
 	});
 });
 
-
 //* `/api/saved` (delete) -  components will use this to delete a saved article in the database
 app.delete("/api/saved", function (req, res) {
   	Article.findOneAndUpdate({"_id": req.params.id}, {$set: {"saveState": false}}, function(err, doc) {
