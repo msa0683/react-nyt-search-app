@@ -10,7 +10,6 @@ var ArticleSchema = new Schema ({
 	},
 	url: {
 		type: String
-
 	}
 });
 

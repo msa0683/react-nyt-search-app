@@ -8,7 +8,6 @@
     "dev": "webpack & node server",
     "start": "node server.js",
     "build": "webpack"
-
   },
   "author": "Mariam  Arghandewal Safi",
   "license": "ISC",
@@ -19,7 +18,8 @@
     "mongoose": "^4.5.1",
     "morgan": "^1.7.0",
     "react": "^0.14.3",
-    "react-dom": "^0.14.3"
+    "react-dom": "^0.14.3",
+    "react-router": "^2.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.3.13",

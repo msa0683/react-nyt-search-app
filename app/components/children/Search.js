@@ -1,74 +1,57 @@
-// import React from "react";
+var React = require("react");
 
-// class Search extends React.Component{
+var helpers = require("../utils/helpers");
+var SearchForm = require('./SearchForm');
+var Results = require('./Results');
 
-// 	getInitialState: function() {
-// 		return { term: "" };
-// 	},
+var Search = React.createClass({
+  getInitialState: function() {
+    return {
+       topic: "",
+       startYear: "",
+       endYear: "",
+       results: []
+    };
+  },
 
-// 	handleChange: function(event) {
+// This function allows childrens to update the parent .
+  setTopic: function(topic, startYear,endYear) {
+    this.setState({
+      topic: topic,
+      startYear: startYear,
+      endYear: endYear
+    }, this.getNYTArticles)
+  },
 
-// 				this.setState({ term: event.target.value });
-// 	},
+  getNYTArticles: function () {
+    var self = this;
+    helpers.runQuery(this.state.topic).then(function (articles) {
+      // setState of results to be the articles that I got back from NYT
+      self.setState({
+        results: articles
+      })
+    })
+  },
 
-// 	handleSubmit: function(event) {
-// 		event.preventDefault();
-// 		this.props.setTerm(this.state.term);
-//    		this.setState({ term: "" });
-//  	},
-//      // // * **Search** - queries the NYT API for articles. Displays API search results from another 
-//      // possible **Query** component and **Results** component. Gives the user the ability to save an 
+  render: function() {
+    return (
+      <div className="row">
 
-//      // article to their Saved Articles.
+        <div className="jumbotron">
+          <h1 className="text-center"><strong><i className="fa fa-newspaper-o"></i> New York Times Search</strong></h1>
+        </div>
 
-// 	render: function() {
-// 	    return (
+        <div className="col-md-12">
+          <SearchForm setTopic={this.setTopic}/>
+        </div>
 
-// 		<div class="row">
-// 			<div class="col-sm-12">
-// 			<br>
-// 				<div class="panel panel-primary">
-// 					<div class="panel-heading">
-// 						<h3 class="panel-title"><strong><i class="fa  fa-list-alt"></i>Search Parameters</strong></h3>
-// 					</div>
-// 					<div class="panel-body">
-// 						<form role="form">
-// 						  <div class="form-group">
-// 						    <label for="search">Search Term:</label>
-// 						    <input type="text" class="form-control" id="searchTerm">
-// 						  </div>
+        <div className="col-md-12">
+          <Results results={this.state.results}/>
+        </div>
 
-// 						  <div class="form-group">
-// 						    <label for="pwd">Number of Records to Retrieve:</label>
-// 							<select class="form-control" id="numRecordsSelect">
-// 								<option value="1">1</option>
+      </div>
+    )
+  }
+});
 
-// 								<option value="5" selected="">5</option>
-// 								<option value="10">10</option>
-// 							</select>			  
-// 						  </div>
-
-
-// 						  <div class="form-group">
-// 						    <label for="startYear">Start Year (Optional):</label>
-// 						    <input type="text" class="form-control" id="startYear">
-// 						  </div>
-
-
-// 						  <div class="form-group">
-// 						    <label for="endYear">End Year (Optional):</label>
-// 						    <input type="text" class="form-control" id="endYear">
-// 						  </div>
-
-
-// 						  <button type="submit" class="btn btn-default" id="runSearch"><i class="fa fa-search"></i> Search</button>
-// 	  					  <button type="button" class="btn btn-default" id="clearAll"><i class="fa fa-trash"></i> Clear Results</button>
-
-// 						</form>
-// 					</div>
-// 				</div>
-// 			</div>
-// 		</div>
-// 	   );
-// 	};
-// };
+module.exports = Search;

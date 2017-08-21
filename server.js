@@ -24,7 +24,12 @@ app.use(express.static("public"));
 // -------------------------------------------------
 
 // MongoDB Configuration configuration (Change this URL to your own DB)
-mongoose.connect("");
+if (process.env.MONGODB_URI) {
+	mongoose.connect(process.env.MONGODB_URI);	
+} else {
+	mongoose.connect("mongodb://127.0.0.1:27017")
+}
+
 const db = mongoose.connection;
 
 db.on("error", function(err) {
@@ -35,16 +40,13 @@ db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
-// Listener
-app.listen(PORT, function() {
-  console.log("App listening on PORT: " + PORT);
-});
-
 //ROUTES
 
 // * `/api/saved` (get) -  components will use this to query MongoDB for all saved articles
 app.get("/api/saved", function(req, res) {
-	Article.find({}).exec(function(err,doc) {
+	Article.find({}).limit(5).exec(function(err,doc) {
+    console.log('hello')
+    console.log(arguments)
 		if (err) {
 			console.log(err)
 		}
@@ -71,29 +73,23 @@ app.post("/api/saved", function(req, res) {
 });
 
 //* `/api/saved` (delete) -  components will use this to delete a saved article in the database
-app.delete("/api/saved", function (req, res) {
-  	Article.findOneAndUpdate({"_id": req.params.id}, {$set: {"saveState": false}}, function(err, doc) {
+app.delete("/api/saved/:id", function (req, res) {
+  	Article.remove({"_id": req.params.id}, function(err, doc) {
   		if (err) {
   			console.log(err)
   		}
   		else {
-  			res.send("Deleted") 
+  			res.send("Deleted")
   		}
   	});
 });
 
-// Will load  single HTML page (with ReactJS) in public/index.html. 
-app.get("/", function(req, res) {
+// Will load  single HTML page (with ReactJS) in public/index.html.
+app.get("*", function(req, res) {
 	res.sendFile(__dirname +"/public/index.html")
 });
 
-
-
-
-
-
-
-
-
-
-
+// Listener
+app.listen(PORT, function() {
+  console.log("App listening on PORT: " + PORT);
+});
